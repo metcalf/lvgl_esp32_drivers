@@ -43,12 +43,6 @@ extern "C" {
 # define SPI_HOST_MAX 3
 #endif
 
-#if ESP_IDF_VERSION_MAJOR >= 5
-    #define portTICK_DELAY_MS portTICK_PERIOD_MS
-#elif USE_PORT_TICK_RATE_MS
-    #define portTICK_DELAY_MS portTICK_RATE_MS
-#endif
-
 /* DISP_BUF_SIZE value doesn't have an special meaning, but it's the size
  * of the buffer(s) passed to LVGL as display buffers. The default values used
  * were the values working for the contributor of the display controller.
@@ -64,7 +58,7 @@ extern "C" {
 #define TFT_DISPLAY_BUFFER_SIZE_IN_BITS (LV_HOR_RES_MAX * 40 * 3 * 8)
 #define TFT_DISPLAY_BUFFER_SIZE (LV_HOR_RES_MAX * 40)
 
-#if CONFIG_IDF_TARGET_ESP32S3 
+#if CONFIG_IDF_TARGET_ESP32S3
     #define DMA_MAX_BIT_LENGHT (1<<18) // according with SPI_LL_DMA_MAX_BIT_LEN in spi_ll.h
 #else
     #define DMA_MAX_BIT_LENGHT (1<<24) // according with SPI_LL_DMA_MAX_BIT_LEN in spi_ll.h

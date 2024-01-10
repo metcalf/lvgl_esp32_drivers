@@ -64,9 +64,9 @@ void pcd8544_init(void){
 
     // Reset the display
     gpio_set_level(PCD8544_RST, 0);
-    vTaskDelay(100 / portTICK_DELAY_MS);
+    vTaskDelay(100 / portTICK_RATE_MS);
     gpio_set_level(PCD8544_RST, 1);
-    vTaskDelay(100 / portTICK_DELAY_MS);
+    vTaskDelay(100 / portTICK_RATE_MS);
 
     pcd8544_send_cmd(0x21);     /* activate chip (PD=0), horizontal increment (V=0), enter extended command set (H=1) */
     pcd8544_send_cmd(0x06);     /* temp. control: b10 = 2  */
@@ -120,7 +120,7 @@ void pcd8544_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t 
 
     if ((area->x1 == 0) && (area->y1 == 0) && (area->x2 == (disp_drv->hor_res - 1)) && (area->y2 == (disp_drv->ver_res - 1))){
 
-        // send complete frame buffer at once. 
+        // send complete frame buffer at once.
         // NOTE: disp_spi_send_colors triggers lv_disp_flush_ready
 
         pcd8544_send_cmd(0x40);  /* set Y address */

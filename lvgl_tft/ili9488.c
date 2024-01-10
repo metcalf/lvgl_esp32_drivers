@@ -61,7 +61,7 @@ void ili9488_init(void)
         {ILI9488_CMD_NEGATIVE_GAMMA_CORRECTION, {0x0F, 0x32, 0x2E, 0x0B, 0x0D, 0x05, 0x47, 0x75, 0x37, 0x06, 0x10, 0x03, 0x24, 0x20, 0x00}, 15},
 		{ILI9488_CMD_POWER_CONTROL_1, {0x17, 0x15}, 2},
 		{ILI9488_CMD_POWER_CONTROL_2, {0x41}, 1},
-		{ILI9488_CMD_POWER_CONTROL_NORMAL_3, {0x44}, 1}, 
+		{ILI9488_CMD_POWER_CONTROL_NORMAL_3, {0x44}, 1},
 		{ILI9488_CMD_MEMORY_ACCESS_CONTROL, {(0x20 | 0x08)}, 1},
 		{ILI9488_CMD_COLMOD_PIXEL_FORMAT_SET, {0x66}, 1},
 		{ILI9488_CMD_INTERFACE_MODE_CONTROL, {0x00}, 1},
@@ -95,16 +95,16 @@ void ili9488_init(void)
 
 	//Reset the display
 	gpio_set_level(ILI9488_RST, 0);
-	vTaskDelay(100 / portTICK_DELAY_MS);
+	vTaskDelay(100 / portTICK_RATE_MS);
 	gpio_set_level(ILI9488_RST, 1);
-	vTaskDelay(100 / portTICK_DELAY_MS);
+	vTaskDelay(100 / portTICK_RATE_MS);
 #endif
 
 	ESP_LOGI(TAG, "ILI9488 initialization.");
 
 	// Exit sleep
 	ili9488_send_cmd(0x01);	/* Software reset */
-	vTaskDelay(100 / portTICK_DELAY_MS);
+	vTaskDelay(100 / portTICK_RATE_MS);
 
 	//Send all the commands
 	uint16_t cmd = 0;
@@ -112,7 +112,7 @@ void ili9488_init(void)
 		ili9488_send_cmd(ili_init_cmds[cmd].cmd);
 		ili9488_send_data(ili_init_cmds[cmd].data, ili_init_cmds[cmd].databytes&0x1F);
 		if (ili_init_cmds[cmd].databytes & 0x80) {
-			vTaskDelay(100 / portTICK_DELAY_MS);
+			vTaskDelay(100 / portTICK_RATE_MS);
 		}
 		cmd++;
 	}
