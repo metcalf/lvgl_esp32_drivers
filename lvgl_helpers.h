@@ -39,6 +39,10 @@ extern "C" {
 #  endif
 #endif
 
+#ifndef SPI_HOST_MAX
+# define SPI_HOST_MAX 3
+#endif
+
 #if ESP_IDF_VERSION_MAJOR >= 5
     #define portTICK_DELAY_MS portTICK_PERIOD_MS
 #elif USE_PORT_TICK_RATE_MS
