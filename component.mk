@@ -46,4 +46,4 @@ $(call compile_only_if,$(and $(CONFIG_LV_TOUCH_CONTROLLER),$(CONFIG_LV_TOUCH_CON
 $(call compile_only_if,$(and $(CONFIG_LV_TOUCH_CONTROLLER),$(CONFIG_LV_TOUCH_DRIVER_PROTOCOL_SPI)), lvgl_touch/tp_spi.o)
 
 # I2C Manager
-$(call compile_only_if,$(CONFIG_LV_I2C), lvgl_i2c/i2c_manager.o)
+$(call compile_only_if,$(CONFIG_LV_I2C), lvgl_i2c/lvgl_i2c_manager.o)

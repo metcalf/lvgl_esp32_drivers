@@ -81,7 +81,7 @@ if(CONFIG_LV_TOUCH_CONTROLLER)
 endif()
 
 if(CONFIG_LV_I2C)
-    list(APPEND SOURCES "lvgl_i2c/i2c_manager.c")
+    list(APPEND SOURCES "lvgl_i2c/lvgl_i2c_manager.c")
 endif()
 
 if("${IDF_VERSION_MAJOR}.${IDF_VERSION_MINOR}" VERSION_GREATER_EQUAL "5.0")
