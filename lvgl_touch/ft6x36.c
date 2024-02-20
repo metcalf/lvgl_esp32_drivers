@@ -33,7 +33,7 @@
 
 static ft6x36_status_t ft6x36_status;
 static uint8_t current_dev_addr;       // set during init
-static ft6x36_touch_t touch_inputs = { -1, -1, LV_INDEV_STATE_REL };    // -1 coordinates to designate it was never touched
+static ft6x36_touch_t touch_inputs = { 0, 0, LV_INDEV_STATE_REL };    // -1 coordinates to designate it was never touched
 #if CONFIG_LV_FT6X36_COORDINATES_QUEUE
 QueueHandle_t ft6x36_touch_queue_handle;
 #endif
