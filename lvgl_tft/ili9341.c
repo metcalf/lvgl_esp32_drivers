@@ -93,6 +93,9 @@ void ili9341_init(void)
 	vTaskDelay(100 / portTICK_PERIOD_MS);
 	gpio_set_level(ILI9341_RST, 1);
 	vTaskDelay(100 / portTICK_PERIOD_MS);
+#else
+	ili9341_send_cmd(0x01); // Software reset
+	vTaskDelay(120 / portTICK_PERIOD_MS);
 #endif
 
 	ESP_LOGI(TAG, "Initialization.");
@@ -121,6 +124,9 @@ void ili9341_init(void)
 void ili9341_flush(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color_map)
 {
 	uint8_t data[4];
+
+	ESP_LOGD(TAG, "flushing start: %dx%d size: %dx%d", area->x1, area->y1, lv_area_get_width(area),
+             lv_area_get_height(area));
 
 	/*Column addresses*/
 	ili9341_send_cmd(0x2A);
